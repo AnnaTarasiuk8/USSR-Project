@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1f23bca8292c414b95bc82aaece0e458" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="DebtSuicideModel.Age" Width="1.5" PointX="3.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DebtSuicideModel.Country" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DebtSuicideModel.DebtPerYear" Width="1.5" PointX="8.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DebtSuicideModel.Generation" Width="1.5" PointX="3.75" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DebtSuicideModel.Indicator" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DebtSuicideModel.NationalDebt" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DebtSuicideModel.Sex" Width="1.5" PointX="3.75" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DebtSuicideModel.Suicide" Width="1.5" PointX="6" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DebtSuicideModel.sysdiagram" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="DebtSuicideModel.Year" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="DebtSuicideModel.FK__Suicide__age_id__60A75C0F" ManuallyRouted="false" />
+        <AssociationConnector Association="DebtSuicideModel.FK__NationalD__count__5629CD9C" ManuallyRouted="false" />
+        <AssociationConnector Association="DebtSuicideModel.FK__Suicide__country__5FB337D6" ManuallyRouted="false" />
+        <AssociationConnector Association="DebtSuicideModel.FK__DebtPerYe__natio__5BE2A6F2" ManuallyRouted="false" />
+        <AssociationConnector Association="DebtSuicideModel.FK__DebtPerYe__year___5CD6CB2B" ManuallyRouted="false" />
+        <AssociationConnector Association="DebtSuicideModel.FK__Suicide__generat__619B8048" ManuallyRouted="false" />
+        <AssociationConnector Association="DebtSuicideModel.FK__NationalD__indic__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="DebtSuicideModel.FK__Suicide__sex_id__628FA481" ManuallyRouted="false" />
+        <AssociationConnector Association="DebtSuicideModel.FK__Suicide__year_id__6383C8BA" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

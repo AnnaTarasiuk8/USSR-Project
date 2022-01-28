@@ -1,0 +1,311 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DebtSuicideModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Age">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="period" Type="String" MaxLength="32" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="Suicides" Relationship="Self.FK__Suicide__age_id__60A75C0F" FromRole="Age" ToRole="Suicide" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="64" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="NationalDebts" Relationship="Self.FK__NationalD__count__5629CD9C" FromRole="Country" ToRole="NationalDebt" />
+    <NavigationProperty Name="Suicides" Relationship="Self.FK__Suicide__country__5FB337D6" FromRole="Country" ToRole="Suicide" />
+  </EntityType>
+  <EntityType Name="DebtPerYear">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="national_debt_id" Type="Int32" />
+    <Property Name="year_id" Type="Int32" />
+    <Property Name="debt" Type="Decimal" Precision="19" Scale="4" />
+    <NavigationProperty Name="NationalDebt" Relationship="Self.FK__DebtPerYe__natio__5BE2A6F2" FromRole="DebtPerYear" ToRole="NationalDebt" />
+    <NavigationProperty Name="Year" Relationship="Self.FK__DebtPerYe__year___5CD6CB2B" FromRole="DebtPerYear" ToRole="Year" />
+  </EntityType>
+  <EntityType Name="Generation">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="64" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="Suicides" Relationship="Self.FK__Suicide__generat__619B8048" FromRole="Generation" ToRole="Suicide" />
+  </EntityType>
+  <EntityType Name="Indicator">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="NationalDebts" Relationship="Self.FK__NationalD__indic__571DF1D5" FromRole="Indicator" ToRole="NationalDebt" />
+  </EntityType>
+  <EntityType Name="NationalDebt">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="country_id" Type="Int32" />
+    <Property Name="indicator_id" Type="Int32" />
+    <NavigationProperty Name="Country" Relationship="Self.FK__NationalD__count__5629CD9C" FromRole="NationalDebt" ToRole="Country" />
+    <NavigationProperty Name="DebtPerYears" Relationship="Self.FK__DebtPerYe__natio__5BE2A6F2" FromRole="NationalDebt" ToRole="DebtPerYear" />
+    <NavigationProperty Name="Indicator" Relationship="Self.FK__NationalD__indic__571DF1D5" FromRole="NationalDebt" ToRole="Indicator" />
+  </EntityType>
+  <EntityType Name="Sex">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="32" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="Suicides" Relationship="Self.FK__Suicide__sex_id__628FA481" FromRole="Sex" ToRole="Suicide" />
+  </EntityType>
+  <EntityType Name="Suicide">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="country_id" Type="Int32" />
+    <Property Name="age_id" Type="Int32" />
+    <Property Name="generation_id" Type="Int32" />
+    <Property Name="sex_id" Type="Int32" />
+    <Property Name="year_id" Type="Int32" />
+    <Property Name="suicide_count" Type="Int32" />
+    <Property Name="population" Type="Int32" />
+    <NavigationProperty Name="Age" Relationship="Self.FK__Suicide__age_id__60A75C0F" FromRole="Suicide" ToRole="Age" />
+    <NavigationProperty Name="Country" Relationship="Self.FK__Suicide__country__5FB337D6" FromRole="Suicide" ToRole="Country" />
+    <NavigationProperty Name="Generation" Relationship="Self.FK__Suicide__generat__619B8048" FromRole="Suicide" ToRole="Generation" />
+    <NavigationProperty Name="Sex" Relationship="Self.FK__Suicide__sex_id__628FA481" FromRole="Suicide" ToRole="Sex" />
+    <NavigationProperty Name="Year" Relationship="Self.FK__Suicide__year_id__6383C8BA" FromRole="Suicide" ToRole="Year" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Year">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="year1" Type="Int16" />
+    <NavigationProperty Name="DebtPerYears" Relationship="Self.FK__DebtPerYe__year___5CD6CB2B" FromRole="Year" ToRole="DebtPerYear" />
+    <NavigationProperty Name="Suicides" Relationship="Self.FK__Suicide__year_id__6383C8BA" FromRole="Year" ToRole="Suicide" />
+  </EntityType>
+  <Association Name="FK__Suicide__age_id__60A75C0F">
+    <End Role="Age" Type="Self.Age" Multiplicity="0..1" />
+    <End Role="Suicide" Type="Self.Suicide" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Age">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Suicide">
+        <PropertyRef Name="age_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__NationalD__count__5629CD9C">
+    <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+    <End Role="NationalDebt" Type="Self.NationalDebt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="NationalDebt">
+        <PropertyRef Name="country_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Suicide__country__5FB337D6">
+    <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+    <End Role="Suicide" Type="Self.Suicide" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Suicide">
+        <PropertyRef Name="country_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DebtPerYe__natio__5BE2A6F2">
+    <End Role="NationalDebt" Type="Self.NationalDebt" Multiplicity="0..1" />
+    <End Role="DebtPerYear" Type="Self.DebtPerYear" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NationalDebt">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="DebtPerYear">
+        <PropertyRef Name="national_debt_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DebtPerYe__year___5CD6CB2B">
+    <End Role="Year" Type="Self.Year" Multiplicity="0..1" />
+    <End Role="DebtPerYear" Type="Self.DebtPerYear" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Year">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="DebtPerYear">
+        <PropertyRef Name="year_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Suicide__generat__619B8048">
+    <End Role="Generation" Type="Self.Generation" Multiplicity="0..1" />
+    <End Role="Suicide" Type="Self.Suicide" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Generation">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Suicide">
+        <PropertyRef Name="generation_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__NationalD__indic__571DF1D5">
+    <End Role="Indicator" Type="Self.Indicator" Multiplicity="0..1" />
+    <End Role="NationalDebt" Type="Self.NationalDebt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Indicator">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="NationalDebt">
+        <PropertyRef Name="indicator_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Suicide__sex_id__628FA481">
+    <End Role="Sex" Type="Self.Sex" Multiplicity="0..1" />
+    <End Role="Suicide" Type="Self.Suicide" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sex">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Suicide">
+        <PropertyRef Name="sex_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Suicide__year_id__6383C8BA">
+    <End Role="Year" Type="Self.Year" Multiplicity="0..1" />
+    <End Role="Suicide" Type="Self.Suicide" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Year">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Suicide">
+        <PropertyRef Name="year_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DebtSuicideEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Ages" EntityType="Self.Age" />
+    <EntitySet Name="Countries" EntityType="Self.Country" />
+    <EntitySet Name="DebtPerYears" EntityType="Self.DebtPerYear" />
+    <EntitySet Name="Generations" EntityType="Self.Generation" />
+    <EntitySet Name="Indicators" EntityType="Self.Indicator" />
+    <EntitySet Name="NationalDebts" EntityType="Self.NationalDebt" />
+    <EntitySet Name="Sexes" EntityType="Self.Sex" />
+    <EntitySet Name="Suicides" EntityType="Self.Suicide" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Years" EntityType="Self.Year" />
+    <AssociationSet Name="FK__Suicide__age_id__60A75C0F" Association="Self.FK__Suicide__age_id__60A75C0F">
+      <End Role="Age" EntitySet="Ages" />
+      <End Role="Suicide" EntitySet="Suicides" />
+    </AssociationSet>
+    <AssociationSet Name="FK__NationalD__count__5629CD9C" Association="Self.FK__NationalD__count__5629CD9C">
+      <End Role="Country" EntitySet="Countries" />
+      <End Role="NationalDebt" EntitySet="NationalDebts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Suicide__country__5FB337D6" Association="Self.FK__Suicide__country__5FB337D6">
+      <End Role="Country" EntitySet="Countries" />
+      <End Role="Suicide" EntitySet="Suicides" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DebtPerYe__natio__5BE2A6F2" Association="Self.FK__DebtPerYe__natio__5BE2A6F2">
+      <End Role="NationalDebt" EntitySet="NationalDebts" />
+      <End Role="DebtPerYear" EntitySet="DebtPerYears" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DebtPerYe__year___5CD6CB2B" Association="Self.FK__DebtPerYe__year___5CD6CB2B">
+      <End Role="Year" EntitySet="Years" />
+      <End Role="DebtPerYear" EntitySet="DebtPerYears" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Suicide__generat__619B8048" Association="Self.FK__Suicide__generat__619B8048">
+      <End Role="Generation" EntitySet="Generations" />
+      <End Role="Suicide" EntitySet="Suicides" />
+    </AssociationSet>
+    <AssociationSet Name="FK__NationalD__indic__571DF1D5" Association="Self.FK__NationalD__indic__571DF1D5">
+      <End Role="Indicator" EntitySet="Indicators" />
+      <End Role="NationalDebt" EntitySet="NationalDebts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Suicide__sex_id__628FA481" Association="Self.FK__Suicide__sex_id__628FA481">
+      <End Role="Sex" EntitySet="Sexes" />
+      <End Role="Suicide" EntitySet="Suicides" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Suicide__year_id__6383C8BA" Association="Self.FK__Suicide__year_id__6383C8BA">
+      <End Role="Year" EntitySet="Years" />
+      <End Role="Suicide" EntitySet="Suicides" />
+    </AssociationSet>
+    <FunctionImport Name="add_indicator">
+      <Parameter Name="name" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="get_data" ReturnType="Collection(DebtSuicideModel.get_data_Result)" />
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(DebtSuicideModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(DebtSuicideModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+  </EntityContainer>
+  <ComplexType Name="get_data_Result">
+    <Property Type="String" Name="name" Nullable="true" MaxLength="64" />
+    <Property Type="Decimal" Name="debt" Nullable="true" Precision="19" />
+    <Property Type="Int32" Name="suicide_count" Nullable="true" />
+    <Property Type="Int32" Name="population" Nullable="true" />
+    <Property Type="String" Name="period" Nullable="true" MaxLength="32" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+</Schema>
